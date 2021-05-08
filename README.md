@@ -10,3 +10,8 @@ only design first page of game.
 ![t11](https://user-images.githubusercontent.com/79657243/117540188-53bc6200-b027-11eb-8e27-c86d29c40581.png)
 
 
+work on animation in splash screen. this animation is heart animation in which heart moves.
+
+![animation1](https://user-images.githubusercontent.com/79657243/117547807-14a00800-b04b-11eb-99f5-bd499dc22592.png)
+
+
