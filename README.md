@@ -22,6 +22,8 @@ just combine the code and resulted combined contact us and home screen menue.
 
 ![home1](https://user-images.githubusercontent.com/79657243/117569450-292de000-b0df-11eb-8817-17b53d2f66aa.png)
 
+code of contact page is uploaded.
+
 
 
 
