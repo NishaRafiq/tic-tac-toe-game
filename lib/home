@@ -1,0 +1,178 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:tictactoe-main/game.dart';
+
+class homepage extends StatefulWidget {
+  @override
+  _homepageState createState() => _homepageState();
+}
+
+class _homepageState extends State<homepage> {
+  List<String> images = [
+    "images/download.jpg",
+    "images/download1.jpg",
+  ];
+
+  List<String> des = [
+    "Multiple Choice Question",
+    "True False Question",
+  ];
+
+  Widget customcard(String langname, String image, String des) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: 10.0,
+        horizontal: 20.0,
+      ),
+      child: InkWell(
+        onTap: () {
+          if (langname == "MCQS") {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                // in changelog 1 we will pass the langname name to ther other widget class
+                // this name will be used to open a particular JSON file
+                // for a particular language
+                builder: (context) => getjson(langname)));
+          } else if (langname == "True/False") {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                // in changelog 1 we will pass the langname name to ther other widget class
+                // this name will be used to open a particular JSON file
+                // for a particular language
+                builder: (context) => getjson2(langname)));
+          }
+        },
+        child: Material(
+          color: Colors.blue,
+          elevation: 10.0,
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                  ),
+                  child: Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(110.0),
+                    child: Container(
+                      // changing from 200 to 150 as to look better
+                      height: 80.0,
+                      width: 80.0,
+                      child: ClipOval(
+                        child: Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            image,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    langname,
+                    style: TextStyle(
+                      fontSize: 10.0,
+                      color: Colors.white,
+                      fontFamily: "Quando",
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    des,
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontFamily: "Alike"),
+                    maxLines: 5,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+    return Scaffold(
+      drawer: NavDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        centerTitle: true,
+        title: Text(
+          "My QuizApp",
+          style: TextStyle(
+            fontFamily: "Quando",
+          ),
+        ),
+      ),
+      body: ListView(
+        children: <Widget>[
+          customcard("MCQS", images[0], des[0]),
+          customcard("True/False", images[1], des[1]),
+        ],
+      ),
+    );
+  }
+}
+
+class NavDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text("Nisha Rafiq"),
+            accountEmail: Text("nisharafique2@gmail.com"),
+            decoration: BoxDecoration(
+              gradient: new LinearGradient(colors: [
+                const Color(0xFF3366FF),
+                const Color(0xFF00CCFF),
+              ], stops: [
+                0.0,
+                1.0
+              ], tileMode: TileMode.clamp),
+            ),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
+                  ? const Color(0xFF00897b)
+                  : Colors.white,
+              child: Text(
+                "N",
+                style: TextStyle(fontSize: 40.0),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () => {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => homepage())),
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.contact_page),
+            title: Text('Contact Me'),
+            onTap: () => {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => aboutus())),
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
